@@ -1,6 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
-
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,14 +18,36 @@
   <script src="main.js" defer></script>
 </head>
 <body>
-<div>Local time: <span id="local-time">XX:XX:XX</span></div>
-<div>Server time: <span id="server-time">XX:XX:XX</span></div>
-<div>Work in progress!</div>
+<div id="time-container">
+  <div>Local time: <span id="local-time">XX:XX:XX</span></div>
+  <div>Server time: <span id="server-time">XX:XX:XX</span></div>
+</div>
+<div id="title-container">
+  <div>Work in progress: <a href="https://github.com/Warzone2054">GitHub</a></div>
+</div>
+<div id="global-container">
+  <div id="left-container">
+    <div id="today-actions-container" class="container">
+      <div>Recommended actions today:</div>
+      <p id="today-actions">
+        Do daily tasks until you get a cosmetic chest!
+      </p>
+    </div>
+    <div id="schedule-container" class="container">
+      <div>Schedule:</div>
+    </div>
+  </div>
+  <div id="posts-container" class="container">
+    <label for="posts-search"></label>
+    <textarea id="posts-search" class="search-bar" rows="1" placeholder="Search posts..."></textarea>
+    <div>Posts:</div>
+    <div id="posts-list"></div>
+  </div>
+</div>
 <noscript>
   <div class="no-js-container">
     <p>JavaScript is required for this website to function properly.</p>
   </div>
 </noscript>
 </body>
-
 </html>

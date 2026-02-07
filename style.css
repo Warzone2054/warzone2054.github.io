@@ -1,7 +1,12 @@
+:root {
+  --today-actions-height: calc(2em + 16px);
+}
 body {
   color: #FFFFFF;
   background: #282828;
   text-align: center;
+  height: max(100%, 100vh);
+  margin: 0;
 }
 h1, h2, a {
   user-select: none;
@@ -37,7 +42,6 @@ a:hover {
   margin: 0px auto;
 }
 .container {
-  margin: auto auto;
   border-radius: 10px;
   border-style: solid;
   border-color: #EEEEEE;
@@ -59,7 +63,6 @@ table.container > tbody > tr > td:not(:last-child) {
   border-right-style: solid;
 }
 div.container {
-  display: inline-block;
   padding: 4px;
 }
 table.container > tbody > tr > td:not(.item) {
@@ -84,4 +87,74 @@ table.container > tbody > tr > td:not(.item) {
   align-items: center;
   vertical-align: middle;
 }
-
+.inline-block {
+  display: inline-block;
+}
+.search-bar {
+  color: #FFFFFF;
+  background: #282828;
+  width: calc(100% - 10px);
+  padding: 4px;
+  border: 1px solid #CCCCCC;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  resize: none;
+  max-lines: 1;
+  transition: border-color 0.4s;
+}
+.search-bar:focus {
+  border-color: #007BFF;
+}
+#time-container {
+  anchor-name: --time-anchor;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 4px;
+}
+#title-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 4px;
+}
+#global-container {
+  position-anchor: --time-anchor;
+  top: calc(2em + 8px);
+  position: relative;
+  margin: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  flex-flow: row nowrap;
+}
+#global-container > div {
+  flex: 1 1 0;
+  min-height: 50%;
+  box-sizing: border-box;
+}
+#left-container {
+  margin-right: 4px;
+}
+#today-actions-container {
+  margin-top: 0;
+  min-height: var(--today-actions-height);
+}
+#today-actions {
+  font-size: 0.8em;
+  font-weight: lighter;
+  color: #CCCCCC;
+  margin: 0;
+}
+#schedule-container {
+  margin-top: 10px;
+  min-height: max(20vh, 100vh - 4em - 16px - var(--today-actions-height));
+}
+#posts-container {
+  margin-left: 4px;
+  margin-top: 0;
+}
+#posts-list {
+  min-height: 20vh;
+}
