@@ -1,5 +1,5 @@
 :root {
-  --today-actions-height: calc(2em + 16px);
+  --today-actions-height: calc(5em + 20px);
 }
 body {
   color: #FFFFFF;
