@@ -151,6 +151,12 @@ table.container > tbody > tr > td:not(.item) {
   margin-top: 10px;
   min-height: max(20vh, 100vh - 4em - 16px - var(--today-actions-height));
 }
+#arms-race-current {
+  color: #CCFFCC;
+}
+#arms-race-next {
+  color: #CCCCCC;
+}
 #posts-container {
   margin-left: 4px;
   margin-top: 0;

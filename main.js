@@ -17,12 +17,41 @@
     timeZone: "Etc/GMT+2",
     weekday: "long",
   });
+  const hourDayFormatServer = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Etc/GMT+2",
+    hour: "2-digit",
+  });
+  function formatDateDifferentialTimer(startDate, endDate) {
+    const diffMs = endDate - startDate;
+    let totalSeconds = Math.floor(diffMs / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    totalSeconds %= 3600;
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    const hh = String(hours).padStart(2, "0");
+    const mm = String(minutes).padStart(2, "0");
+    const ss = String(seconds).padStart(2, "0");
+    return `${hh}:${mm}:${ss}`;
+  }
   const functionDictionary = {};
+  const armsRaces = [
+    "Hero Advancement", // 2
+    "City Building", // 4
+    "Unit Progression", // 5
+    "Tech Research", // 3
+    "Drone Boost",// 1
+    "Shiny Tasks", // 6
+  ]
   const localTimeElement = document.getElementById('local-time');
   const serverTimeElement = document.getElementById('server-time');
   const todayActionsElement = document.getElementById('today-actions');
+  const armsRaceCurrent = document.getElementById('arms-race-current');
+  const armsRaceNext = document.getElementById('arms-race-next');
+  const armsRaceTimer = document.getElementById('arms-race-timer');
   let cacheHash = localStorage.getItem("cacheHash") || "";
   let oldWeekDay = "";
+  let oldHourTime = "";
+  let nextArmsRace = Date.now();
   setInterval(function () {
     const timeNow = Date.now();
     localTimeElement.innerText = dateFormatLocal.format(timeNow);
@@ -32,12 +61,28 @@
       serverTimeElement.innerText = dateFormatServer.format(timeNow);
       functionDictionary.updateSeconds()
     }
+    armsRaceTimer.innerText = formatDateDifferentialTimer(timeNow, nextArmsRace);
   }, 100);
   functionDictionary.updateSeconds = function () {
     const weekDay = weekDayFormatServer.format(Date.now());
     if (oldWeekDay !== weekDay) {
       oldWeekDay = weekDay;
       functionDictionary.updateTasks(weekDay);
+    }
+    const hourTime = hourDayFormatServer.format(Date.now());
+    if (oldHourTime !== hourTime) {
+      oldHourTime = hourTime;
+      const offsetHours = 18;
+      const timeNow = Date.now();
+      const hoursSinceLaunch = Math.floor((timeNow - Date.UTC(2026)) / (1000 * 60 * 60)) + offsetHours;
+      const armsRaceIndex = Math.floor(hoursSinceLaunch / 4) % armsRaces.length;
+      if (armsRaceCurrent != null) {
+        armsRaceCurrent.innerText = armsRaces[armsRaceIndex];
+        armsRaceNext.innerText = armsRaces[(armsRaceIndex + 1) % armsRaces.length];
+      }
+      nextArmsRace = Date.UTC(2026) +
+        (((hoursSinceLaunch - offsetHours) + (4 - (hoursSinceLaunch % 4))) * (1000 * 60 * 60))
+      console.log(hourTime + " -> " + hoursSinceLaunch + " -> " + armsRaceIndex + " -> " + nextArmsRace.toLocaleString());
     }
   }
   functionDictionary.updateTasks = function (weekDay) {
