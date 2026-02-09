@@ -2,3 +2,9 @@ dist
 .cache
 .idea
 .vscode
+admins.json
+data.json
+posts.json
+admins.txt
+php-error.log
+lockdown.lock

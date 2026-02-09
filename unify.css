@@ -3,15 +3,26 @@ CSS Style Sheet that unify font rendering between browsers and operating system
 (Require CSS3 Support on the used browser)
 By Fox2Code
 */
-@import url('https://fonts.googleapis.com/css?family=Roboto:500,700&display=fallback');
+@import url('https://fonts.googleapis.com/css2?family=Roboto');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono');
+
+@font-face {
+  font-family: 'Twitter Color Emoji';
+  src: url('TwitterColorEmoji-SVGinOT.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 :root, textarea {
   /* Unify font */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', 'Twitter Color Emoji', 'Arial', sans-serif;
   font-size: max(18px, 1em);
   font-kerning: normal;
   font-optical-sizing: none;
+}
+code, pre, tt, kbd, samp {
+  font-family: 'JetBrains Mono', monospace;
 }

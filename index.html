@@ -3,10 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self';
+  connect-src 'self' https://fox2code.com https://cdn.jsdelivr.net;
+  script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com data:; object-src 'none'">
   <title>Warzone 2054</title>
   <link rel="stylesheet" href="unify.css">
   <link rel="stylesheet" href="style.css">
-  <meta name="description" content="Warzone 2054 website for ">
+  <meta name="description" content="Warzone 2054 website for Last War">
 
   <meta property="og:title" content="">
   <meta property="og:type" content="">
@@ -15,7 +20,11 @@
   <meta property="og:image:alt" content="">
 
   <meta name="theme-color" content="#fafafa">
-  <script src="main.js" defer></script>
+  <meta name="darkreader-lock">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="popup.js"></script>
+  <script src="main.js" defer async></script>
+  <script src="news.js"></script>
 </head>
 <body>
 <div id="time-container">
@@ -36,7 +45,7 @@
     <div id="schedule-container" class="container">
       <div>Schedule:</div>
       <div id="arms-race">
-        <!-- <span id="arms-race-current">???</span> -&gt; <span id="arms-race-next">???</span><br/> -->
+        <span id="arms-race-current">???</span> -&gt; <span id="arms-race-next">???</span><br/>
         Next arms race: <span id="arms-race-timer">XX:XX:XX</span>
       </div>
     </div>
@@ -47,6 +56,9 @@
     <div>Posts:</div>
     <div id="posts-list"></div>
   </div>
+</div>
+<div id="popup-container">
+  <div id="popup-content" class="container"></div>
 </div>
 <noscript>
   <div class="no-js-container">
