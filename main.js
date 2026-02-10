@@ -1,4 +1,4 @@
-(function () {
+let libraryFunction = function () {
   'use strict';
   const developerMode = location.hostname === "localhost";
   const dataUrl = developerMode ? "data.json" : "https://fox2code.com/w2054/data.json";
@@ -69,6 +69,10 @@
   const armsRaceCurrent = document.getElementById('arms-race-current');
   const armsRaceNext = document.getElementById('arms-race-next');
   const armsRaceTimer = document.getElementById('arms-race-timer');
+  if (localTimeElement === undefined || localTimeElement == null) {
+    console.error("localTimeElement is undefined or null", localTimeElement);
+    return;
+  }
   const weekOfYear = getWeekNumber(Date.now());
   const armsRaceEntryCount = 42; // (24 / 4) * 7
   let cacheHash = localStorage.getItem("cacheHash") || "";
@@ -232,4 +236,11 @@
   fetchData().catch(function (error) {
     console.error("Failed to fetch data:", error);
   });
-})()
+}
+// Delay loading if somehow we get loaded too early
+if (document.getElementById('local-time') == null) {
+  setTimeout(libraryFunction, 1);
+} else {
+  libraryFunction();
+}
+libraryFunction = null;

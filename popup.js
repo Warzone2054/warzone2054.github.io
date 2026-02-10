@@ -1,9 +1,11 @@
 (function () {
   let popupContainer = document.getElementById('popup-container');
   let popupContent = document.getElementById('popup-content');
+  let root = document.querySelector(":root");
   window.document.addEventListener('DOMContentLoaded', function () {
     popupContainer = document.getElementById('popup-container');
     popupContent = document.getElementById('popup-content');
+    root = document.querySelector(":root");
   });
   function escapeHtml(text) {
     return String(text)
@@ -312,6 +314,7 @@
     if (!this.isFinished) {
       this.finish();
     }
+    root.classList.add('has-popup-open');
     popupContent.innerHTML = this.content.join("");
     popupContainer.style.display = "flex";
     if (emojiData) {
@@ -346,6 +349,7 @@
   }
   window.W2054Popup = W2054Popup;
   window.W2054Popup.closePopup = function () {
+    root.classList.remove('has-popup-open');
     popupContainer.style.display = "none";
     popupContent.innerHTML = "";
   }

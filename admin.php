@@ -56,7 +56,7 @@ if (!$isAdmin) {
   http_response_code(200);
   ?>
 <!DOCTYPE html>
-<html lang="en">
+<html id="admin-root" lang="en">
   <head>
     <title>Warzone2054 -> Admin panel</title>
     <link rel="stylesheet" href="unify.css">
@@ -76,7 +76,7 @@ if (!$isAdmin) {
 $adminUser = $admins[$adminTokenRepresentation];
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html id="admin-root" lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -110,7 +110,9 @@ $adminUser = $admins[$adminTokenRepresentation];
   <div id="posts-list"></div>
 </div>
 <div id="popup-container">
+  <br/>
   <div id="popup-content" class="container"></div>
+  <button id="popup-close" onclick="W2054Popup.closePopup()">✕</button>
 </div>
 </body>
 </html>

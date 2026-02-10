@@ -55,10 +55,15 @@
     search.addEventListener("input", function () {
       updateNewsVisibility()
     })
+    fetchNews();
+    // Refresh every 10 minutes
+    setInterval(fetchNews, 600000);
+  };
+  function fetchNews() {
     const postsList = document.getElementById("posts-list");
     fetch(dataUrl).then(response => response.json()).then(_data => {
-      newsElements = []
       data = _data;
+      newsElements = []
       postsList.innerHTML = "";
       for (const news of data) {
         const newsIndex = newsElements.length;

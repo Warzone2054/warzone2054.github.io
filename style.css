@@ -2,6 +2,7 @@
   --today-actions-height: calc(6em + 20px);
   --font-size-small: max(14px, 0.75em);
   --font-size-medium-small: max(14px, 0.8em);
+  --font-size-medium-big: max(20px, 1.5em);
 }
 body {
   color: #FFFFFF;
@@ -9,6 +10,9 @@ body {
   text-align: center;
   height: max(100%, 100vh);
   margin: 0;
+}
+:root {
+  overflow: hidden;
 }
 h1, h2, a {
   user-select: none;
@@ -155,6 +159,7 @@ table.container > tbody > tr > td:not(.item) {
   background: #303030;
   margin-left: 4px;
   margin-right: 4px;
+  margin-bottom: 8px;
   border: 1px solid #CCCCCC;
   border-radius: 8px;
   padding: 1px 5px;
@@ -163,6 +168,9 @@ table.container > tbody > tr > td:not(.item) {
 }
 .news-entry:hover {
   border-color: #007BFF;
+}
+.news-entry:last-child {
+  margin-bottom: 4px;
 }
 .news-content {
   padding-top: 0;
@@ -180,6 +188,9 @@ table.container > tbody > tr > td:not(.item) {
   text-align: right;
   font-size: var(--font-size-small);
   color: #CCCCCC;
+}
+#admin-root:root {
+  overflow-y: auto;
 }
 #time-container {
   anchor-name: --time-anchor;
@@ -242,8 +253,13 @@ table.container > tbody > tr > td:not(.item) {
 }
 #posts-list {
   min-height: max(20vh, 5em);
+  overflow: auto;
+}
+#posts-container > #posts-list {
+  max-height: calc(100vh - 4em - 48px);
 }
 #popup-container {
+  overflow-y: auto;
   position: fixed;
   top: 0;
   left: 0;
@@ -252,16 +268,38 @@ table.container > tbody > tr > td:not(.item) {
   background: rgba(0, 0, 0, 0.2);
   display: none; /* flex */
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 #popup-content {
+  overflow-y: hidden;
+  margin: calc(20px + 2em) 6px;
   position: relative;
   text-align: left;
   justify-content: left;
   min-width: calc(300px + 4em);
 }
+#popup-close {
+  position: fixed;
+  top: 0;
+  right: 8px;
+  padding: 4px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font: var(--font-size-medium-big);
+}
 
 @media screen and (max-width: 900px), screen and (orientation: portrait) {
+  :root {
+    overflow-y: auto;
+  }
+  .has-popup-open:root {
+    overflow-y: hidden;
+  }
+  #admin-root.has-popup-open:root {
+    overflow-y: hidden;
+  }
   #global-container {
     display: block;
   }
@@ -282,5 +320,7 @@ table.container > tbody > tr > td:not(.item) {
   }
   #posts-list {
     min-height: 5em;
+    overflow: hidden;
+    max-height: none !important;
   }
 }
