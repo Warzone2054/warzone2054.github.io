@@ -30,6 +30,15 @@ let libraryFunction = function () {
     day: '2-digit',
     weekday: 'short'
   });
+  const armsRaceDataWarzone2054 = [
+    1,2,0,3,4,0,
+    2,3,1,4,0,1,
+    4,0,3,1,2,3,
+    1,2,0,3,4,0,
+    3,4,2,0,1,2,
+    2,3,1,4,0,1,
+    4,0,3,1,2,3
+  ];
   function formatDateDifferentialTimer(startDate, endDate) {
     const diffMs = endDate - startDate;
     let totalSeconds = Math.floor(diffMs / 1000);
@@ -189,27 +198,16 @@ let libraryFunction = function () {
     const timeNow = Date.now();
     const hoursSinceLaunch = Math.floor((timeNow - Date.UTC(2026)) / (1000 * 60 * 60)) + offsetHours;
     if (armsRaceCurrent != null) {
-      const remoteData = functionDictionary.remoteData;
-      if (remoteData === undefined || remoteData === null) {
-        armsRaceCurrent.innerText = "Loading...";
-        armsRaceNext.innerText = "Loading...";
-      } else if (remoteData['weekOfYear'] === weekOfYear) {
-        const armsRaces = remoteData['armsRace']
-        if (armsRaces.length !== armsRaceEntryCount) {
+        if (armsRaceDataWarzone2054.length !== armsRaceEntryCount) {
           armsRaceCurrent.innerText = "Data error!";
           armsRaceNext.innerText = "Data error!";
         } else {
-          const armsRaceIndex = (Math.floor(hoursSinceLaunch / 4) + 13) % armsRaces.length;
+          const armsRaceIndex = (Math.floor(hoursSinceLaunch / 4) + 13) % armsRaceEntryCount;
           console.log(hoursSinceLaunch, armsRaceIndex);
-          armsRaceCurrent.innerText = armsRacesTypes[armsRaces[armsRaceIndex]];
-          const armsRaceIndexNext = armsRaceIndex + 1;
-          armsRaceNext.innerText = armsRaceIndexNext === armsRaceEntryCount ?
-            "???" : armsRacesTypes[armsRaces[armsRaceIndexNext]];
+          armsRaceCurrent.innerText = armsRacesTypes[armsRaceDataWarzone2054[armsRaceIndex]];
+          const armsRaceIndexNext = armsRaceIndex + 1 % armsRaceEntryCount;
+          armsRaceNext.innerText = armsRacesTypes[armsRaceDataWarzone2054[armsRaceIndexNext]];
         }
-      } else {
-        armsRaceCurrent.innerText = "???";
-        armsRaceNext.innerText = "???";
-      }
     }
     nextArmsRace = Date.UTC(2026) +
       (((hoursSinceLaunch - offsetHours) + (4 - (hoursSinceLaunch % 4))) * (1000 * 60 * 60))
@@ -232,6 +230,7 @@ let libraryFunction = function () {
 
   window.onTaskClickedListener = functionDictionary.onTaskClickedListener;
   functionDictionary.updateSeconds();
+  functionDictionary.updateArmsRace();
   window.w2054InitializeNews(false);
   fetchData().catch(function (error) {
     console.error("Failed to fetch data:", error);

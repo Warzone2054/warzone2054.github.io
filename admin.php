@@ -100,7 +100,7 @@ $adminUser = $admins[$adminTokenRepresentation];
 <p>Your user token: <code><?php echo $adminTokenRepresentation; ?></code> (Status: Admin)</p>
 <div id="action-container" class="container">
   <button class="button" onclick="window.openMakeNewsPopup();">Add post</button>
-  <button class="button" onclick="window.openArmsRacePopup();">Update arms race</button>
+  <!-- <button class="button" onclick="window.openArmsRacePopup();">Update arms race</button> -->
   <button class="button" onclick="window.openLockdownPopup();">Lockdown panel</button>
 </div>
 <div id="admin-posts-container" class="container">
